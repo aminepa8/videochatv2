@@ -24,9 +24,13 @@ app.use(express.static('public'))
 app.get("/", function(req, res){
 	res.render("index.ejs");
 });
+app.get("/chat/:roomName/:username", function(req, res){
+	res.render("chat.ejs"),{roomName: req.params.roomName, username: req.params.username};
+});
 
-//var server = https.createServer(options,app);
+
 var server = http.createServer(app);
+
 server.listen(process.env.PORT || 8000);
 
 var io = socketIO(server);

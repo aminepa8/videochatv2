@@ -10,7 +10,7 @@ var remoteStream;
 var turnReady;
 
 //Initialize turn/stun server here
-var pcConfig =turnConfig;
+var pcConfig = null;//turnConfig;
 
 var localStreamConstraints = {
     audio: true,
@@ -22,8 +22,10 @@ var localStreamConstraints = {
 //var room = 'foo';
 
 // Prompting for room name:
-var room = prompt('Enter room name:');
-var username = prompt('Enter a username:');
+var link =window.location.pathname;
+var arrayParam = link.split("/");
+var room = arrayParam[2]; //prompt('Enter room name:');
+var username =arrayParam[3];   //prompt('Enter a username:');
 $( "#chatRoomName" ).append( room);
 
 //Initializing socket.io
@@ -104,6 +106,7 @@ navigator.mediaDevices.getUserMedia(localStreamConstraints)
   alert('getUserMedia() error: ' + e.name);
 });
 
+
 //If found local stream
 function gotStream(stream) {
   console.log('Adding local stream.');
@@ -112,6 +115,10 @@ function gotStream(stream) {
   sendMessage('got user media', room);
   if (isInitiator) {
     maybeStart();
+        //Mute and hide video after getting UserMedia
+    console.log("Wee3");
+    playStop();
+    muteUnmute();
   }
 }
 
@@ -224,7 +231,9 @@ function handleRemoteHangup() {
 
 function stop() {
   isStarted = false;
-  pc.close();
+  if(pc !==null){
+    pc.close();
+  }
   pc = null;
 }
 
