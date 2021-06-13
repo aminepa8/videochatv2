@@ -2,14 +2,14 @@
 
 //Loading dependencies & initializing express
 var os = require('os');
-var https = require('https');
+var http = require('http');
 var fs = require('fs');
 var express = require('express');
 var app = express();
-var https = require('https');
+//var https = require('https');
 //For signalling in WebRTC
 var socketIO = require('socket.io');
-
+/*
 //self signed ssl
 var options = {
     key: fs.readFileSync('certificates/key.pem', 'utf8'),
@@ -17,7 +17,7 @@ var options = {
     requestCert: false,
     rejectUnauthorized: false
 };
-
+*/
 app.use(express.static('public'))
 
 app.get("/", function(req, res){
@@ -33,7 +33,7 @@ app.get("/chat/:roomName/:username", function(req, res){
 });
 
 
-var server = https.createServer(options,app);
+var server = http.createServer(app);
 
 server.listen(process.env.PORT || 8000);
 

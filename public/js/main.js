@@ -10,7 +10,7 @@ var remoteStream;
 var turnReady;
 
 //Initialize turn/stun server here
-var pcConfig = null;//turnConfig;
+var pcConfig =turnConfig;
 
 var localStreamConstraints = {
     audio: true,
