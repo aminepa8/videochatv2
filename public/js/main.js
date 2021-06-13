@@ -10,7 +10,7 @@ var remoteStream;
 var turnReady;
 
 //Initialize turn/stun server here
-var pcConfig = turnConfig;
+var pcConfig = null;//turnConfig;
 
 var localStreamConstraints = {
     audio: true,
@@ -27,6 +27,7 @@ var arrayParam = link.split("/");
 var room = arrayParam[2]; //prompt('Enter room name:');
 var username =arrayParam[3];   //prompt('Enter a username:');
 $( "#chatRoomName" ).append( room);
+$( "#chatusername" ).append( username);
 
 //Initializing socket.io
 var socket = io.connect();
@@ -116,7 +117,7 @@ function gotStream(stream) {
   if (isInitiator) {
     maybeStart();
         //Mute and hide video after getting UserMedia
-    console.log("Wee3");
+    console.log("Lool stop video");
     playStop();
     muteUnmute();
   }
@@ -239,17 +240,23 @@ function stop() {
 
 //Control
 const setMuteButton = () => {
+  /*
   const html = `
   <i class="fas fa-microphone"></i>
   <span>Mute</span>`
   $('.main_mute_button').html(html);
+  */
+  $('#audioControl').html("mic");
 }
 
 const setUnmuteButton = () => {
+  /*
   const html = `
   <i class="unmute fas fa-microphone-slash"></i>
   <span>Ummte</span>`
   $('.main_mute_button').html(html);
+  */
+  $('#audioControl').html("mic_off");
 }
 
 const muteUnmute = () => {
@@ -259,33 +266,40 @@ const muteUnmute = () => {
       setUnmuteButton();
   }
   else {
-      setMuteButton();
+    setMuteButton();
       localStream.getAudioTracks()[0].enabled = true;
   }
 
   
 }
 const setPlayVideo = () => {
+  /*
   const html = `
   <i class="stop fas fa-video-slash"></i>
   <span>PlayVideo</span>`
   $('.main_video_button').html(html);
+  */
+  $('#videoControl').html("videocam");
 }
 
 const setStopVideo = () => {
+  /*
   const html = `
   <i class="fas fa-video"></i>
   <span>Stop Video</span>`
   $('.main_video_button').html(html);
+  */
+  $('#videoControl').html("videocam_off");
 }
 const playStop = () => {
   let enabled = localStream.getVideoTracks()[0].enabled;
   if(enabled){
     localStream.getVideoTracks()[0].enabled = false;
-      setPlayVideo();
+    setStopVideo();
   }
   else {
-      setStopVideo();
+    setPlayVideo();
+      
       localStream.getVideoTracks()[0].enabled = true;
   }
 }
@@ -293,7 +307,7 @@ const playStop = () => {
 
 //Chat Section
 const scrollToBottom = () => {
-  let d = $('main_chat_window');
+  let d = $('.slimscroll');
   d.scrollTop(d.prop("scrollHeight"));
 }
 let text = $('input');
@@ -306,6 +320,47 @@ let text = $('input');
     });
 
     socket.on('createMessage', ({username,message}) => {
-        $('ul').append(`<li class="message"><b>user</b><br />${username} : ${message}</li>`)
+      var d = new Date();
+      var hours = d.getHours();
+      var minutes = d.getMinutes();
+      var ChatClass = (this.username !== username) ? "chats-right" : "";
+        $('.messages').append(`
+        <div class="chats ${ChatClass}">
+        <div class="chat-content">
+           <div class="message-content">
+           ${message}
+              <div class="chat-time">
+                 <div>
+                    <div class="time"><i class="fas fa-clock"></i> ${hours}:${minutes}</div>
+                 </div>
+              </div>
+           </div>
+           <div class="chat-profile-name">
+              <h6>${username} </h6>
+           </div>
+        </div>
+     </div>
+        `)
         scrollToBottom();
+        ShakeIt();
     })
+//<li class="message"><b>user</b><br />${username} : ${message}</li>
+
+    $( "#chatForm" ).submit(function( event ) {
+      //alert( "Handler for .submit() called." );
+      event.preventDefault();
+    });
+
+
+    ///Animation chat new
+
+  function ShakeIt(){
+
+    $('#msg_recived').addClass('shaker'); 
+
+    setTimeout(function(){
+
+    $('#msg_recived').removeClass('shaker'); 
+    },300);
+    // eve.preventDefault();
+ }

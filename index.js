@@ -6,11 +6,10 @@ var https = require('https');
 var fs = require('fs');
 var express = require('express');
 var app = express();
-//var https = require('https'); no need in heroku 
-var http = require('http');
+var https = require('https');
 //For signalling in WebRTC
 var socketIO = require('socket.io');
-/* no need in heroku cloud
+
 //self signed ssl
 var options = {
     key: fs.readFileSync('certificates/key.pem', 'utf8'),
@@ -18,18 +17,23 @@ var options = {
     requestCert: false,
     rejectUnauthorized: false
 };
-*/
+
 app.use(express.static('public'))
 
 app.get("/", function(req, res){
 	res.render("index.ejs");
+});
+
+//Test NewChat style
+app.get("/chatNew/:roomName/:username", function(req, res){
+	res.render("chatNew.ejs"),{roomName: req.params.roomName, username: req.params.username};
 });
 app.get("/chat/:roomName/:username", function(req, res){
 	res.render("chat.ejs"),{roomName: req.params.roomName, username: req.params.username};
 });
 
 
-var server = http.createServer(app);
+var server = https.createServer(options,app);
 
 server.listen(process.env.PORT || 8000);
 
