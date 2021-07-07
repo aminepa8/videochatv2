@@ -9,8 +9,11 @@ var app = express();
 //var https = require('https');
 //For signalling in WebRTC
 var socketIO = require('socket.io');
-/*
+var bodyParser = require('body-parser'); 
+//Rooms Array
+let rooms = {}
 //self signed ssl
+/*
 var options = {
     key: fs.readFileSync('certificates/key.pem', 'utf8'),
     cert: fs.readFileSync('certificates/cert.pem', 'utf8'),
@@ -19,18 +22,49 @@ var options = {
 };
 */
 app.use(express.static('public'))
-
+app.use(bodyParser.json())
 app.get("/", function(req, res){
 	res.render("index.ejs");
 });
 
+function CheckRoomPass (username, room, password) {
+	if (!rooms[room] || (rooms[room] && !rooms[room].password)) {
+		if (!rooms[room]) {
+			rooms[room] = {};
+		}
+		rooms[room].password = password;
+		//rooms[room][socketId] = username;
+		//rooms[socketId] = room;
+		return true;
+	} else {
+		if (rooms[room].password == password) {
+			//rooms[socketId] = room;
+			//rooms[room][socketId] = username;
+			//socket.join(room);
+			return true;
+		} else {
+			return false;
+		}
+	}
+}
 //Test NewChat style
-app.get("/chatNew/:roomName/:username", function(req, res){
-	res.render("chatNew.ejs"),{roomName: req.params.roomName, username: req.params.username};
+app.post("/chat", function(req, res){
+	
+	if(CheckRoomPass(req.body.username, req.body.roomName, req.body.password)) {
+		console.log('Client said: ', req.body.roomName);
+		console.log('Client said: ', req.body.username);
+		console.log('Client said: ', req.body.password);
+		res.send({status:true, data:{roomName:req.body.roomName, username:req.body.username, password:req.body.password}})
+
+	} else {
+		res.send({status:false})
+	}
+	//res.render("chatNew.ejs"),{roomName: req.params.roomName, username: req.params.username};
 });
-app.get("/chat/:roomName/:username", function(req, res){
-	res.render("chat.ejs"),{roomName: req.params.roomName, username: req.params.username};
+app.get("/chat", function(req, res){
+	res.render("chatNew.ejs");
 });
+
 
 
 var server = http.createServer(app);
@@ -57,7 +91,19 @@ io.sockets.on('connection', function(socket) {
 	  // for a real app, would be room-only (not broadcast)
 	  socket.in(room).emit('message', message, room);
 	});
-  
+  //PublicKey Order to exchange Step3
+	 socket.on('exchangePubKeys', ({ PublicKey, room ,username}) =>{
+		 
+		console.log("Step3");
+		console.log(PublicKey);
+		//socket.in(room).emit('ExchangePublicKeyNow', {PublicKey:PublicKey, room :room,username:username});
+		socket.broadcast.emit('ExchangePublicKeyNow', {PublicKey:PublicKey, room :room,username:username});
+		//socket.broadcast.to('room').emit('ExchangePublicKeyNow', {PublicKey:PublicKey, room :room,username:username});
+		//io.to(room).emit('StartPublicKeysExchange');
+		//io.to(room).emit('ExchangePublicKeyNow', {PublicKey:PublicKey, room :room,username:username});
+		//socket.emit('ExchangePublicKeyNow',{PublicKey:PublicKey, room :room,username:username});
+	  });
+
 	socket.on('create or join', function(room) {
 	  log('Received request to create or join room ' + room);
   
@@ -75,6 +121,9 @@ io.sockets.on('connection', function(socket) {
 		io.sockets.in(room).emit('join', room);
 		socket.join(room);
 		socket.emit('joined', room, socket.id);
+		//Exchange Key signal step1
+		//socket.emit('StartPublicKeysExchange',room);
+		io.to(room).emit('StartPublicKeysExchange');
 		io.sockets.in(room).emit('ready');
 	  } else { // max two clients
 		socket.emit('full', room);
