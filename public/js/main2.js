@@ -15,6 +15,6 @@ $(document).ready(function() {
     }); 
 });
 function showChat() {
-    $("#ChatBox").css({ 'display' : '' });
+    $("#ChatBox").css({ 'display' : 'block' });
     $("html, body").animate({ scrollTop: $(document).height() }, 1000);
 }
