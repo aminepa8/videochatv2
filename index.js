@@ -62,7 +62,7 @@ app.post("/chat", function(req, res){
 	//res.render("chatNew.ejs"),{roomName: req.params.roomName, username: req.params.username};
 });
 app.get("/chat", function(req, res){
-	res.render("chatNew.ejs");
+	res.render("chatv2.ejs");
 });
 
 

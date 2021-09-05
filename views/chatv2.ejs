@@ -1,0 +1,169 @@
+<html lang="en">
+	<head>
+	   <title>VideoChat V2</title>
+	   <meta charset="utf-8">
+	   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	   <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900" rel="stylesheet">
+	   <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+	   <link rel="stylesheet" href="css/owl.carousel.min.css">
+	   <link rel="stylesheet" href="css/owl.theme.default.min.css">
+	   <link rel="stylesheet" href="css/animate.css">
+	   <link rel="stylesheet" href="https://adminlte.io/themes/v3/dist/css/adminlte.min.css">
+	   <link rel="stylesheet" href="css/stylev2.css">
+	</head>
+	<body>
+	   <section class="ftco-section">
+		  <div class="container">
+			 <div class="row">
+				<div class="col-md-12 text-center">
+				   <h2 class="heading-section mb-3 pb-md-3">&nbsp;</h2>
+				</div>
+				<div class="col-md-8" id="mainView">
+				   <div class="slider-hero">
+					  <video class="box top left" id="localVideo"  autoplay muted playsinline></video>
+					  <div class="featured-carousel owl-carousel owl-loaded owl-drag">
+						 <div class="owl-stage-outer">
+							<div class="owl-stage">
+								<video class="remoteVideo" id="remoteVideo"  autoplay  playsinline poster="/images/w3html5.gif" id="remoteVideo">
+								 Your browser does not support the video tag.
+							   </video> 
+						</div>
+						 </div>
+						 <div class="owl-dots">
+							<i  role="button" class="owl-dot circle material-icons" id="sideChatBtn">wechat</i>
+							<i role="button" class="owl-dot circle material-icons">info</i>
+						 </div>
+					  </div>
+					  <div class="my-5 text-center">
+						 <ul class="thumbnail">
+							<li class="mob-controls chat-btn"><a href="#" onclick="showChat()"><span  class="circle material-icons">wechat</span></a></li>
+							<li ><a href="#" onclick="muteUnmute()"><span id="audioControl" class="circle material-icons">mic</span></a></li>
+							<li><a href="#" onclick="hangup()"><span class=" circle call-end material-icons">call_end</span></a></li>
+							<li><a href="#" onclick="playStop()"><span id="videoControl" class="circle material-icons">videocam</span></a></li>
+							<li class="mob-controls info-btn"><a href="#"><span id="videoControl" class="circle material-icons">info</span></a></li>
+						 </ul>
+					  </div>
+				   </div>
+				</div>
+				<!--Chat-->
+				<div class="col-md-4">
+					<!-- DIRECT CHAT -->
+					<div class="card direct-chat direct-chat-primary direct-chat-contacts-open" id="ChatBox">
+					  <div class="card-header">
+						<h3 class="card-title" id="chatRoomName">Chat</h3>
+	
+						<div class="card-tools">
+						  <span title="3 New Messages" class="badge">&nbsp;</span>
+						  <button type="button" class="btn btn-tool" data-card-widget="remove" id="closeChatBtn">
+							<i class="material-icons">highlight_off</i>
+						  </button>
+						</div>
+					  </div>
+					  <!-- /.card-header -->
+					  <div class="card-body">
+						<!-- Conversations are loaded here -->
+						<div class="direct-chat-messages">
+						  <!-- Message. Default to the left -->
+						  <div class="direct-chat-msg">
+							<div class="direct-chat-infos clearfix">
+							  <span class="direct-chat-name float-left">Alexander Pierce</span>
+							  <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
+							</div>
+							<!-- /.direct-chat-infos -->
+							
+							<!-- /.direct-chat-img -->
+							<div class="direct-chat-text">
+							  Is this template really for free? That's unbelievable!
+							</div>
+							<!-- /.direct-chat-text -->
+						  </div>
+						  <!-- /.direct-chat-msg -->
+	
+						  <!-- Message to the right -->
+						  <div class="direct-chat-msg right">
+							<div class="direct-chat-infos clearfix">
+							  <span class="direct-chat-name float-right">Sarah Bullock</span>
+							  <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
+							</div>
+							<!-- /.direct-chat-infos -->
+							
+							<!-- /.direct-chat-img -->
+							<div class="direct-chat-text">
+							  You better believe it!
+							</div>
+							<!-- /.direct-chat-text -->
+						  </div>
+						  <!-- /.direct-chat-msg -->
+	
+						  <!-- Message. Default to the left -->
+						  <div class="direct-chat-msg">
+							<div class="direct-chat-infos clearfix">
+							  <span class="direct-chat-name float-left">Alexander Pierce</span>
+							  <span class="direct-chat-timestamp float-right">23 Jan 5:37 pm</span>
+							</div>
+							<!-- /.direct-chat-infos -->
+							
+							<!-- /.direct-chat-img -->
+							<div class="direct-chat-text">
+							  Working with AdminLTE on a great new app! Wanna join?
+							</div>
+							<!-- /.direct-chat-text -->
+						  </div>
+						  <!-- /.direct-chat-msg -->
+	
+						  <!-- Message to the right -->
+						  <div class="direct-chat-msg right">
+							<div class="direct-chat-infos clearfix">
+							  <span class="direct-chat-name float-right">Sarah Bullock</span>
+							  <span class="direct-chat-timestamp float-left">23 Jan 6:10 pm</span>
+							</div>
+							<!-- /.direct-chat-infos -->
+							
+							<!-- /.direct-chat-img -->
+							<div class="direct-chat-text">
+							  I would love to.
+							</div>
+							<!-- /.direct-chat-text -->
+						  </div>
+						  <!-- /.direct-chat-msg -->
+	
+						</div>
+						<!--/.direct-chat-messages-->
+	
+						<!-- Contacts are loaded here -->
+						
+						<!-- /.direct-chat-pane -->
+					  </div>
+					  <!-- /.card-body -->
+					  <div class="card-footer">
+						<form action="#" method="post">
+						  <div class="input-group">
+							<input type="text" name="message" placeholder="Type Message ..." class="form-control chat_form">
+							<span class="input-group-append">
+							  <button type="button" class="btn btn-primary" onclick="SendMsg()">Send</button>
+							</span>
+						  </div>
+						</form>
+					  </div>
+					  <!-- /.card-footer-->
+					</div>
+					<!--/.direct-chat -->
+				  </div>
+			 </div>
+		  </div>
+	   </section>
+<!-- jQuery -->
+<script src="https://adminlte.io/themes/v3/plugins/jquery/jquery.min.js"></script>
+	   <script src="js/popper.js"></script>
+	   <!-- Bootstrap 4 -->
+<script src="https://adminlte.io/themes/v3/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="https://adminlte.io/themes/v3/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="https://adminlte.io/themes/v3/dist/js/adminlte.js"></script>
+	   <script src="js/main2.js"></script>
+	</body>
+	<style type="text/css"></style>
+ </html>
+ 
+ 
