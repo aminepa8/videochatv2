@@ -1,10 +1,9 @@
 
 /*Custom Css by MLy*/
-html{
-  height: 100vh;
-}
+
 html,body {
   background-color: #141619;
+  height: 100vh;
 }
 .box{
   border: 1px solid red;
@@ -138,7 +137,7 @@ body {
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color: #fff; }
+  background-color:#141619; }
 
 [tabindex="-1"]:focus {
   outline: 0 !important; }
