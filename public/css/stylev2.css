@@ -1,9 +1,9 @@
-
 /*Custom Css by MLy*/
-
+html{
+  height: 100vh !important;
+}
 html,body {
   background-color: #141619;
-  height: 100vh;
 }
 .box{
   border: 1px solid red;
@@ -40,7 +40,6 @@ border-radius: 10px;
   display: none !important;
 }
 @media screen and (max-width: 767.98px) {
-
   html,body {
     background-color: #141619;
   }
@@ -137,7 +136,7 @@ body {
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color:#141619; }
+  background-color: #141619; }
 
 [tabindex="-1"]:focus {
   outline: 0 !important; }
