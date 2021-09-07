@@ -138,8 +138,10 @@ socket.on('StartPublicKeysExchange',function(room){
 
 //Step 4 ExchangeKeys Process finall
 socket.on('ExchangePublicKeyNow',({ PublicKey, room ,username}) =>{
+
   console.log("Step 4");
   console.log("Remote User PublicKey");
+  simpleToast(username + " Joined");
   //if(this.username.localeCompare(username) == 0){
     RemotePublicKey= PublicKey;
     console.log(RemotePublicKey);
@@ -438,5 +440,16 @@ if( text.val().length !== 0){
     },300);
     // eve.preventDefault();
  }
+
+ function simpleToast(msg) {
+  // Get the SIMPLE-TOAST DIV 	
+  $("#guestUserName").append(msg);
+  var x = document.getElementById("simpleToast");
+  // Add the "show" class to DIV
+  x.className = "show";
+  // After 3 seconds, remove the show class from DIV
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+
 
 //Useful https://www.codegrepper.com/code-examples/javascript/broadcast+to+specific+room+in+socketio
