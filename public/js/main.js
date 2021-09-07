@@ -403,7 +403,7 @@ if( text.val().length !== 0){
       var messageToShow = (this.username == username) ? LocalMessage : decodedMessage;
         $('.messages').append(`
         <div class="direct-chat-messages">
-        <div class="direct-chat-msg">
+        <div class="direct-chat-msg ${ChatClass}">
         <div class="direct-chat-infos clearfix">
           <span class="direct-chat-name float-${ChatClass}">${username}</span>
           <span class="direct-chat-timestamp float-${ChatClass}">${hours}:${minutes}</span>
