@@ -399,8 +399,8 @@ if( text.val().length !== 0){
       var minutes = d.getMinutes();
       var ChatClass = (this.username !== username) ? "left" : "right";
       var ChatMainClass = (this.username !== username) ? "" : "right";
-      var ChatUserNameClass = (ChatMainClass !== "right") ? "left" : "right";
-      var ChatTimeClass = (ChatMainClass !== "left") ? "right" : "left";
+      var ChatUserNameClass = (ChatMainClass === "right") ? "right" : "left";
+      var ChatTimeClass = (ChatMainClass === "right") ? "left" : "right";
       var decodedMessage = Decrypt(Privatekey,message);
       console.log("decodedMessage : "+decodedMessage);
       var messageToShow = (this.username == username) ? LocalMessage : decodedMessage;
