@@ -17,6 +17,7 @@ var PublicKey;
 var Privatekey;
 var RemotePublicKey;
 var LocalMessage;
+var OtherPeerUsername;
 //Initialize turn/stun server here
 var pcConfig =turnConfig;
 
@@ -106,6 +107,9 @@ socket.on('log', function(array) {
 //Driver code
 socket.on('message', function(message, room) {
     console.log('Client received message:', message,  room);
+    if (message.includes("bye")) {
+      simpleToast(OtherPeerUsername + " left");
+    }
     if (message === 'got user media') {
       maybeStart();
     } else if (message.type === 'offer') {
@@ -138,7 +142,7 @@ socket.on('StartPublicKeysExchange',function(room){
 
 //Step 4 ExchangeKeys Process finall
 socket.on('ExchangePublicKeyNow',({ PublicKey, room ,username}) =>{
-
+  OtherPeerUsername = username;
   console.log("Step 4");
   console.log("Remote User PublicKey");
   simpleToast(username + " Joined");
