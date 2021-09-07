@@ -398,11 +398,12 @@ if( text.val().length !== 0){
       var hours = d.getHours();
       var minutes = d.getMinutes();
       var ChatClass = (this.username !== username) ? "left" : "right";
+      var ChatMainClass = (this.username !== username) ? "" : "right";
       var decodedMessage = Decrypt(Privatekey,message);
       console.log("decodedMessage : "+decodedMessage);
       var messageToShow = (this.username == username) ? LocalMessage : decodedMessage;
         $('.messages').append(`
-        <div class="direct-chat-msg ${ChatClass}">
+        <div class="direct-chat-msg ${ChatMainClass}">
         <div class="direct-chat-infos clearfix">
           <span class="direct-chat-name float-${ChatClass}">${username}</span>
           <span class="direct-chat-timestamp float-${ChatClass}">${hours}:${minutes}</span>
