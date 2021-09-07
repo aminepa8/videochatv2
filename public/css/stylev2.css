@@ -1,6 +1,41 @@
 /*Custom Css by MLy*/
+#send-btn{
+  background-color: #f39c12;
+  color: #1f2d3d;
+  border-color: #f39c12;
+}
+#send-btn:hover{
+  border-color: rgb(200, 127, 10);
+  color: #ffff;
+}
+#ChatBox{
+  background-color: #36404A !important;
+}
+.card {
+  color: #fff !important; 
+}
+.direct-chat-primary .right > .direct-chat-text {
+  background-color: #f39c12 !important;
+  border-color: #f39c12 !important;
+  color: #1f2d3d !important;
+}
+
+.direct-chat-primary .right > .direct-chat-text::after, .direct-chat-primary .right > .direct-chat-text::before {
+
+  border-left-color: #f39c12 !important;
+
+}
 html{
   height: 100vh !important;
+} 
+
+#closeChatBtn{
+  color: #f39c12 !important;
+}
+
+#sideChatBtn {
+  color: #f39c12;
+  border-color: #f39c12;
 }
 html,body {
   background-color: #141619;
