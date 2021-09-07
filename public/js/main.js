@@ -397,26 +397,26 @@ if( text.val().length !== 0){
       var d = new Date();
       var hours = d.getHours();
       var minutes = d.getMinutes();
-      var ChatClass = (this.username !== username) ? "" : "chats-right";
+      var ChatClass = (this.username !== username) ? "left" : "right";
       var decodedMessage = Decrypt(Privatekey,message);
       console.log("decodedMessage : "+decodedMessage);
       var messageToShow = (this.username == username) ? LocalMessage : decodedMessage;
         $('.messages').append(`
-        <div class="chats ${ChatClass}">
-        <div class="chat-content">
-           <div class="message-content">
-           ${messageToShow}
-              <div class="chat-time">
-                 <div>
-                    <div class="time"><i class="fas fa-clock"></i> ${hours}:${minutes}</div>
-                 </div>
-              </div>
-           </div>
-           <div class="chat-profile-name">
-              <h6>${username} </h6>
-           </div>
+        <div class="direct-chat-messages">
+        <div class="direct-chat-msg">
+        <div class="direct-chat-infos clearfix">
+          <span class="direct-chat-name float-${ChatClass}">${username}</span>
+          <span class="direct-chat-timestamp float-${ChatClass}">${hours}:${minutes}</span>
         </div>
-     </div>
+        <!-- /.direct-chat-infos -->
+        
+        <!-- /.direct-chat-img -->
+        <div class="direct-chat-text">
+        ${messageToShow}
+        </div>
+        <!-- /.direct-chat-text -->
+        </div>
+        <!-- /.direct-chat-msg -->
         `)
         scrollToBottom();
         ShakeIt();
@@ -433,11 +433,11 @@ if( text.val().length !== 0){
 
   function ShakeIt(){
 
-    $('#msg_recived').addClass('shaker'); 
+    $('.msg_recived').addClass('shaker'); 
 
     setTimeout(function(){
 
-    $('#msg_recived').removeClass('shaker'); 
+    $('.msg_recived').removeClass('shaker'); 
     },300);
     // eve.preventDefault();
  }
