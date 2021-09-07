@@ -418,7 +418,7 @@ if( text.val().length !== 0){
         </div>
         <!-- /.direct-chat-msg -->
         `)
-        scrollToBottom();
+        //scrollToBottom();
         ShakeIt();
     })
 //<li class="message"><b>user</b><br />${username} : ${message}</li>
