@@ -447,7 +447,7 @@ if( text.val().length !== 0){
 
  function simpleToast(msg) {
   // Get the SIMPLE-TOAST DIV 	
-  $("#guestUserName").append(msg);
+  $("#guestUserName").html(msg);
   var x = document.getElementById("simpleToast");
   // Add the "show" class to DIV
   x.className = "show";
