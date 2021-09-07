@@ -402,21 +402,15 @@ if( text.val().length !== 0){
       console.log("decodedMessage : "+decodedMessage);
       var messageToShow = (this.username == username) ? LocalMessage : decodedMessage;
         $('.messages').append(`
-        <div class="direct-chat-messages">
         <div class="direct-chat-msg ${ChatClass}">
         <div class="direct-chat-infos clearfix">
           <span class="direct-chat-name float-${ChatClass}">${username}</span>
           <span class="direct-chat-timestamp float-${ChatClass}">${hours}:${minutes}</span>
         </div>
-        <!-- /.direct-chat-infos -->
-        
-        <!-- /.direct-chat-img -->
         <div class="direct-chat-text">
         ${messageToShow}
         </div>
         <!-- /.direct-chat-text -->
-        </div>
-        <!-- /.direct-chat-msg -->
         `)
         //scrollToBottom();
         ShakeIt();
