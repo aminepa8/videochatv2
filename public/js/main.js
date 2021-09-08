@@ -69,6 +69,7 @@ console.log( "data from session storeage "+ data.roomName);
 $( "#chatRoomName" ).append( room);
 $( "#chatusername" ).append( username); 
 $( "#roomPasswordLabel" ).append( password);
+$("#roomInfo").attr("tooltip","Password : "+password);
 //Initializing socket.io
 var socket = io.connect();
 
