@@ -107,9 +107,6 @@ socket.on('log', function(array) {
 //Driver code
 socket.on('message', function(message, room) {
     console.log('Client received message:', message,  room);
-    if (message.includes("bye")) {
-      simpleToast(OtherPeerUsername + " left");
-    }
     if (message === 'got user media') {
       maybeStart();
     } else if (message.type === 'offer') {
@@ -128,6 +125,9 @@ socket.on('message', function(message, room) {
       pc.addIceCandidate(candidate);
     } else if (message === 'bye' && isStarted) {
       handleRemoteHangup();
+    }
+    if (message.includes("bye")) {
+      simpleToast(OtherPeerUsername + " left");
     }
 });
   //Step 2 ExchangeKeys Process
