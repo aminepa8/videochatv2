@@ -129,7 +129,7 @@ socket.on('message', function(message, room) {
       handleRemoteHangup();
     }
     if ((typeof(message) == "string" &&  message.includes("bye"))) {
-      simpleToast(OtherPeerUsername + " left");
+      simpleToast(OtherPeerUsername + " left","#f39c12");
     }
 });
   //Step 2 ExchangeKeys Process
@@ -147,7 +147,7 @@ socket.on('ExchangePublicKeyNow',({ PublicKey, room ,username}) =>{
   OtherPeerUsername = username;
   console.log("Step 4");
   console.log("Remote User PublicKey");
-  simpleToast(username + " Joined");
+  simpleToast(username + " Joined","#28a745");
   //if(this.username.localeCompare(username) == 0){
     RemotePublicKey= PublicKey;
     console.log(RemotePublicKey);
@@ -447,9 +447,10 @@ if( text.val().length !== 0){
     // eve.preventDefault();
  }
 
- function simpleToast(msg) {
+ function simpleToast(msg,msgColor) {
   // Get the SIMPLE-TOAST DIV 	
   $("#guestUserName").html(msg);
+  $("#guestUserName").css("background-color", msgColor);
   var x = document.getElementById("simpleToast");
   // Add the "show" class to DIV
   x.className = "show";
