@@ -118,7 +118,7 @@ border-radius: 10px;
 html,body {
   background-color: #141619;
 }
-#roomInfo:hover {
+#roomInfo:hover ,#roomInfo2:hover{
   color: #f39c12;
 }
 /**Toast User Join*/
