@@ -128,7 +128,7 @@ socket.on('message', function(message, room) {
     } else if (message === 'bye' && isStarted) {
       handleRemoteHangup();
     }
-    if (message.includes("bye")) {
+    if ((typeof(message) == "string" &&  message.includes("bye"))) {
       simpleToast(OtherPeerUsername + " left");
     }
 });
