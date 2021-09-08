@@ -1,4 +1,4 @@
-# pfa-my-skype-scenario-1
+# pfa-my-skype-scenario-1  version 2
 Moulay Mohammed Amine et Asmae Amayoud
 
 # Install

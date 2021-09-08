@@ -193,6 +193,12 @@ html,body {
   display: none;
   opacity: 0;
 }
+@media screen and (max-width: 767.98px) {
+  [tooltip]::before,
+[tooltip]::after {
+  font-size: .4em; /* opinion 3 */
+}
+}
 [tooltip]::before {
   content: '';
   border: 5px solid transparent; /* opinion 4 */
